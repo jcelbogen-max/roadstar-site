@@ -46,6 +46,12 @@ p.body{font-size:16px;color:var(--muted);max-width:720px}
 #contact a.mail:hover{background:var(--light);color:#fff}
 #contact a.mail.alt{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.55)}
 #contact a.mail.alt:hover{background:rgba(255,255,255,.12);color:#fff}
+#contact .addr{display:flex;align-items:center;flex-wrap:wrap;gap:12px 16px;margin-top:22px;padding:14px 18px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);border-radius:10px;max-width:640px}
+#contact .addr .lbl{font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--light);min-width:150px}
+#contact .addr a{color:#fff;font-weight:700;font-size:17px;text-decoration:none;word-break:break-all;user-select:all}
+#contact .addr a:hover{text-decoration:underline}
+#contact .copy{margin-left:auto;background:#fff;color:var(--navy);border:0;border-radius:6px;font:600 13px 'Raleway',Arial,sans-serif;padding:8px 14px;cursor:pointer}
+#contact .copy:hover{background:var(--light);color:#fff}
 #contact .tag{margin-top:40px;color:var(--light);font-weight:600;letter-spacing:.12em;text-transform:uppercase;font-size:13px}
 footer{padding:30px 0 40px;border-top:1px solid #e8ecf2}
 footer .row{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
@@ -93,8 +99,8 @@ footer a{color:#8a92a3}
 <div class="kicker">Get In Touch</div>
 <h2>Submissions, appointments, and program information.</h2>
 <p>Brokers and program partners can send submissions directly to our intake inbox. For program information or appointment inquiries, reach out and we'll respond promptly.</p>
-<a class="mail" href="mailto:submissions@roadstarins.com?subject=RoadStar%20Submission">submissions@roadstarins.com</a>
-<a class="mail alt" href="mailto:jelbogen@nsspecialty.com?subject=RoadStar%20Inquiry">Program Inquiries</a>
+<div class="addr"><span class="lbl">Submissions</span><a href="mailto:submissions@roadstarins.com?subject=RoadStar%20Submission">submissions@roadstarins.com</a><button type="button" class="copy" data-copy="submissions@roadstarins.com">Copy</button></div>
+<div class="addr"><span class="lbl">Program inquiries</span><a href="mailto:jelbogen@nsspecialty.com?subject=RoadStar%20Inquiry">jelbogen@nsspecialty.com</a><button type="button" class="copy" data-copy="jelbogen@nsspecialty.com">Copy</button></div>
 <div class="tag">Let's hit the road.</div>
 </div>
 </section>
@@ -106,5 +112,15 @@ footer a{color:#8a92a3}
 </div>
 </footer>
 
+<script>
+document.querySelectorAll('.copy').forEach(function(b){
+  b.addEventListener('click',function(){
+    var t=b.getAttribute('data-copy');
+    var done=function(){b.textContent='Copied';setTimeout(function(){b.textContent='Copy'},1800)};
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(done,done)}
+    else{var i=document.createElement('input');i.value=t;document.body.appendChild(i);i.select();try{document.execCommand('copy')}catch(e){}document.body.removeChild(i);done()}
+  });
+});
+</script>
 </body>
 </html>
